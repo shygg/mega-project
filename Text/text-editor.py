@@ -2,22 +2,26 @@
 
 import tkinter
 
+
 #command from the open button calls this fine func
 def open_file():
     print(text_field.get())
     print("hello")
     f = open(text_field.get(), "r+")
     data = f.read()
+    print(data)
     f.close()
     text_area.delete("1.0", tkinter.END)
     text_area.insert("1.0", data)
+
 
 #command from the save button calls this fine func
 def save_file():
     print(text_field.get())
     f = open(text_field.get(), "w")
     data = text_area.get("1.0", tkinter.END)
-    f.write(data)
+#it had to be done, else I would be getting a newline after each save
+    f.write(data[0:-1])
     f.close()
     open_file()
 
