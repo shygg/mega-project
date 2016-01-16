@@ -2,25 +2,29 @@
 
 import socket
 
-ip = "192.168.1.1"
-s = socket.socket(2, 1)
-socket.setdefaulttimeout(2)
+ip = '127.0.0.1'
+print("checking ip", ip)
 
 
 def porttry(ip, port):
     try:
-        s.connect(ip, port)
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.connect((ip, port))
+        s.close
         return True
     except:
         return None
 
 
-for port in range(0, 10000):
+print(porttry(ip, 50007))
+
+
+for port in range(75, 10000):
     value = porttry(ip, port)
     if value is None:
-        print("%d not open" % port)
+        #print("%d not open" % port)
+        pass
     else:
         print("%d open!" % port)
-        break
 
 input()
